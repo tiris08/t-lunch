@@ -10,10 +10,38 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_20_091118) do
+ActiveRecord::Schema.define(version: 2021_08_20_111424) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "daily_menus", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "food_items", force: :cascade do |t|
+    t.string "name"
+    t.decimal "price"
+    t.integer "course"
+    t.bigint "daily_menu_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["daily_menu_id"], name: "index_food_items_on_daily_menu_id"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.bigint "daily_menu_id", null: false
+    t.bigint "user_id", null: false
+    t.integer "first_course_id"
+    t.integer "main_course_id"
+    t.integer "drink_course_id"
+    t.decimal "total_price"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["daily_menu_id"], name: "index_orders_on_daily_menu_id"
+    t.index ["user_id"], name: "index_orders_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "name"
@@ -29,4 +57,7 @@ ActiveRecord::Schema.define(version: 2021_08_20_091118) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "food_items", "daily_menus"
+  add_foreign_key "orders", "daily_menus"
+  add_foreign_key "orders", "users"
 end
