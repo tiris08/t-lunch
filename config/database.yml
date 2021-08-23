@@ -3,13 +3,15 @@ development:
   encoding: unicode
   database: lunch_app_development
   pool: 5
-  username: taras
-  password: <%= ENV['APPNAME_DATABASE_PASSWORD'] %>
+  host: localhost
+  username: lunch_app
+  
 
 test:
   adapter: postgresql
   encoding: unicode
-  database: Lunch_app_test
+  database: lunch_app_test
   pool: 5
-  username: taras
-  password: <%= ENV['APPNAME_DATABASE_PASSWORD'] %>
+  host: localhost
+  username: lunch_app
+  
