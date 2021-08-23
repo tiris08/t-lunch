@@ -1,24 +1,12 @@
-# README
+# Lunch app
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This app is a service that will provide an easy way to order lunch for staff of any organization
 
-Things you may want to cover:
+Lunch app will be built mainly by using next tools:
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* Ruby 3.0.2
+* Rails 6.1.4
+* Postgresql 12.8
+* Devise
+* Semantic UI
+* Rspec
