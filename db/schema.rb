@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_20_111424) do
+ActiveRecord::Schema.define(version: 2021_08_23_115243) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,17 +30,13 @@ ActiveRecord::Schema.define(version: 2021_08_20_111424) do
     t.index ["daily_menu_id"], name: "index_food_items_on_daily_menu_id"
   end
 
-  create_table "orders", force: :cascade do |t|
-    t.bigint "daily_menu_id", null: false
+  create_table "order_items", force: :cascade do |t|
+    t.bigint "food_item_id", null: false
     t.bigint "user_id", null: false
-    t.integer "first_course_id"
-    t.integer "main_course_id"
-    t.integer "drink_course_id"
-    t.decimal "total_price"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["daily_menu_id"], name: "index_orders_on_daily_menu_id"
-    t.index ["user_id"], name: "index_orders_on_user_id"
+    t.index ["food_item_id"], name: "index_order_items_on_food_item_id"
+    t.index ["user_id"], name: "index_order_items_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -58,6 +54,6 @@ ActiveRecord::Schema.define(version: 2021_08_20_111424) do
   end
 
   add_foreign_key "food_items", "daily_menus"
-  add_foreign_key "orders", "daily_menus"
-  add_foreign_key "orders", "users"
+  add_foreign_key "order_items", "food_items"
+  add_foreign_key "order_items", "users"
 end
