@@ -13,4 +13,6 @@
       %p.notice= notice
     - if flash[:alert]
       %p.alert= alert
-    = yield
+    .ui.container
+      = yield
+
