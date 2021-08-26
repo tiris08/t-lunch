@@ -10,9 +10,11 @@
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
   %body
     - if flash[:notice]
-      %p.notice= notice
+      .ui.positive.center_flash.floating.message
+        %p.notice= notice
     - if flash[:alert]
-      %p.alert= alert
+      .ui.negative.center_flash.floating.message
+        %p.alert= alert
     .ui.container
       = yield
 
