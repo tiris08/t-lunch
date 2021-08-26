@@ -9,8 +9,11 @@
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
   %body
-    - if flash[:notice]
-      %p.notice= notice
-    - if flash[:alert]
-      %p.alert= alert
-    = yield
+    - if current_user
+      = render 'layouts/header'
+    .ui.container
+      - if flash[:notice]
+        %p.notice= notice
+      - if flash[:alert]
+        %p.alert= alert
+      = yield
