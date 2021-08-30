@@ -1,5 +1,5 @@
 class DailyMenusController < ApplicationController
   def index
-    @date = DateTime.now.strftime("%d %b %Y")
+    @daily_menus = DailyMenu.last(10)
   end
 end
