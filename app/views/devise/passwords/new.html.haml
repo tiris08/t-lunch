@@ -1,9 +1,11 @@
-%h2.header Forgot your password?
-= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
-  = render "devise/shared/error_messages", resource: resource
-  .ui.form.segment 
-    .field
-      = f.input :email
-    = f.submit "Send me reset password instructions", class: 'ui button'
-    %br/
-    = render "devise/shared/links"
+.ui.middle.aligned.center.aligned.grid 
+  .column 
+    %h2.header Forgot your password?
+    = simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
+      = render "devise/shared/error_messages", resource: resource
+      .ui.form.segment 
+        .field
+          = f.input :email
+        = f.submit "Send me reset password instructions", class: 'ui fluid blue button'
+    .ui.bottom.attached.message
+      = render "devise/shared/links"
