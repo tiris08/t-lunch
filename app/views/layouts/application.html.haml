@@ -16,5 +16,6 @@
     - if flash[:alert]
       .ui.negative.center_flash.large.message
         = alert
+    - if current_user
+      = render 'layouts/header'
     = yield
-

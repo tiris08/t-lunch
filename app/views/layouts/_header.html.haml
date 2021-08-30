@@ -1,0 +1,11 @@
+.ui.menu
+  .ui.container
+    = link_to 'Dashboard', root_path, class: "active item"
+    - if current_user && current_user.is_admin?
+      %a.item
+        Users
+    .right.menu
+      = link_to 'Settings', edit_user_registration_path, class: "item"
+      .item
+        = link_to 'Log out', destroy_user_session_path, method: :delete, class: 'ui primary button'
+        
