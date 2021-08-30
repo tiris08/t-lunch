@@ -1,1 +1,14 @@
-@import '@doabit/semantic-ui-sass/src/scss/semantic-ui.scss'
+@import '@doabit/semantic-ui-sass/src/scss/semantic-ui.scss';
+
+// flash messages
+.center_flash {
+  text-align: center;
+}
+// forms container
+body > .ui.middle.aligned.center.aligned.grid {
+  height: 100%;
+  .column {
+  max-width: 450px;
+  }
+}
+  

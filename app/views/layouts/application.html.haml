@@ -6,11 +6,15 @@
     %meta{:content => "width=device-width,initial-scale=1", :name => "viewport"}/
     = csrf_meta_tags
     = csp_meta_tag
+    %link{:href => "https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css", :rel => "stylesheet"}/
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
   %body
     - if flash[:notice]
-      %p.notice= notice
+      .ui.positive.center_flash.large.message
+        = notice
     - if flash[:alert]
-      %p.alert= alert
+      .ui.negative.center_flash.large.message
+        = alert
     = yield
+
