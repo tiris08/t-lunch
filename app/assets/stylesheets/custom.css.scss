@@ -4,3 +4,11 @@
 .center_flash {
   text-align: center;
 }
+// forms container
+body > .ui.middle.aligned.center.aligned.grid {
+  height: 100%;
+  .column {
+  max-width: 450px;
+  }
+}
+  
