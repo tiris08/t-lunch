@@ -1,0 +1,18 @@
+.ui.container
+  %table.ui.very.basic.celled.table
+    %thead
+      %tr
+        %th 
+          = "Menu list on #{@daily_menu.created_at.strftime("%A %d %b %Y")}"
+        %th Price
+    %tbody
+      - @daily_menu.food_items.order(:course).each do |item|
+        %tr
+          %td
+            %h4.ui.header
+              = item.name
+              .sub.header
+                = item.course.gsub("_", " ").capitalize
+          %td
+            = item.price
+  
