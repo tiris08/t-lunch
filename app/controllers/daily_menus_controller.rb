@@ -1,6 +1,6 @@
 class DailyMenusController < ApplicationController
   def index
-    @daily_menus = DailyMenu.last(10)
+    @daily_menus = DailyMenu.order(created_at: :desc).page(params[:page])
   end
 
   def show
