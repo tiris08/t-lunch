@@ -1,0 +1,23 @@
+.ui.container
+  .ui.grid 
+    .column    
+      %h2.header Create a manu for today
+      = simple_form_for @daily_menu do |f|
+        = f.simple_fields_for :food_items do |item|
+          %h3.header First course
+          .ui.form.segment
+            = item.input :course, :as => :hidden, :input_html => { :value => 1 } 
+            = item.input :name
+            = item.input :price
+          %h3.header Main course
+          .ui.form.segment 
+            = item.input :course, :as => :hidden, :input_html => { :value => 2 }
+            = item.input :name
+            = item.input :price
+          %h3.header Drink
+          .ui.form.segment 
+            = item.input :course, :as => :hidden, :input_html => { :value => 3 }
+            = item.input :name
+            = item.input :price
+        = f.submit 'Update', class: 'ui blue button'
+        = link_to "Back", :back, class: 'ui button'
