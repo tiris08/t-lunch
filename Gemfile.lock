@@ -1,3 +1,28 @@
+GIT
+  remote: https://github.com/faker-ruby/faker.git
+  revision: 4767edc5a11215ff2c023b582d1cb14ffe4e276b
+  branch: master
+  specs:
+    faker (2.19.0)
+      i18n (>= 1.6, < 2)
+
+GIT
+  remote: https://github.com/kaminari/kaminari
+  revision: 73b93405b95615b5ad3f53c3dffe419a59890cad
+  specs:
+    kaminari (1.2.1)
+      activesupport (>= 4.1.0)
+      kaminari-actionview (= 1.2.1)
+      kaminari-activerecord (= 1.2.1)
+      kaminari-core (= 1.2.1)
+    kaminari-actionview (1.2.1)
+      actionview
+      kaminari-core (= 1.2.1)
+    kaminari-activerecord (1.2.1)
+      activerecord
+      kaminari-core (= 1.2.1)
+    kaminari-core (1.2.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -230,9 +255,11 @@ DEPENDENCIES
   byebug
   capybara (>= 3.26)
   devise (~> 4.8)
+  faker!
   hamlit (~> 2.15, >= 2.15.1)
   hamlit-rails
   jbuilder (~> 2.7)
+  kaminari!
   listen (~> 3.3)
   pg
   puma (~> 5.0)

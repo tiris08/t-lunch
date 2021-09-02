@@ -1,86 +1,20 @@
-.ui.container  
-  .ui.segment
-    .ui.grid
-      .five.column.row
-        .column
-          .ui.fluid.link.card
-            .content
-              .header Monday
+.ui.container
+  .ui.vertical.segment
+    .ui.five.column.grid
+      - @daily_menus.reverse.each do |menu|
+        .column 
+          .ui.fluid.link.card 
+            .content 
+              .header
+                = menu.created_at.strftime("%A")
               .description
-                = @date
+                = menu.created_at.strftime("%d %b %Y")
                 %br/
                 %br/
-            = link_to 'History', edit_user_registration_path, class: "item ui bottom attached button"
-        .column
-          .ui.fluid.raised.link.card
-            .content
-              .header Tuesday
-              .description
-                %br/
-                %br/
-            .ui.bottom.attached.button History
-        .column
-          .ui.fluid.raised.link.card
-            .content
-              .header Wednsday
-              .description
-                %br/
-                %br/
-            .ui.bottom.attached.blue.button Make an order
-        .column
-          .ui.fluid.raised.link.card
-            .content
-              .header Thursday
-              .description
-                %br/
-                %br/
-            .ui.bottom.attached.button History
-        .column
-          .ui.fluid.raised.link.card
-            .content
-              .header Friday
-              .description
-                %br/
-                %br/
-            .ui.bottom.attached.button History
-      .five.column.row
-        .column
-          .ui.fluid.raised.link.card
-            .content
-              .header Monday
-              .description
-                %br/
-                %br/
-            .ui.bottom.attached.button History
-        .column
-          .ui.fluid.raised.link.card
-            .content
-              .header Tuesday
-              .description
-                %br/
-                %br/
-            .ui.bottom.attached.button History
-        .column
-          .ui.fluid.raised.link.card
-            .content
-              .header Wednsday
-              .description
-                %br/
-                %br/
-            .ui.bottom.attached.button History
-        .column
-          .ui.fluid.raised.link.card
-            .content
-              .header Thursday
-              .description
-                %br/
-                %br/
-            .ui.bottom.attached.button History
-        .column
-          .ui.fluid.raised.link.card
-            .content
-              .header Friday
-              .description
-                %br/
-                %br/
-            .ui.bottom.attached.button History
+            - if menu.created_at.today?
+              = link_to 'Make an order', root_path, class: "ui bottom attached blue button" 
+            - else
+              = link_to 'History', menu, class: "ui bottom attached button" 
+      .one.column.row
+        .celled.center.aligned.column
+          = paginate @daily_menus
