@@ -5,9 +5,7 @@ class DailyMenusController < ApplicationController
 
   def show
     @daily_menu = DailyMenu.find(params[:id])
-    @user_order = FoodItem.joins(:orders, :daily_menu).where(order_items: {user_id: current_user.id}, 
-                                                             daily_menu: {id: params[:id]})
-    @user_order_cost = 0
-    @user_order.each {|item| @user_order_cost += item.price }
+    @user_order = @daily_menu.food_items.joins(:orders).where(order_items: { user: current_user })
+    @user_order_cost = @user_order.pluck(:price).sum
   end
 end
