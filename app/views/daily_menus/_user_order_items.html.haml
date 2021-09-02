@@ -5,7 +5,7 @@
         = "My order on #{@daily_menu.created_at.strftime("%A %d %b %Y")}"
       %th Price
   %tbody
-    - @user_order.each do |item|
+    - @user_order_items.each do |item|
       %tr
         %td
           %h4.ui.header
