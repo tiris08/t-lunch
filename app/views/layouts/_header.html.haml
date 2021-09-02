@@ -1,9 +1,11 @@
 .ui.menu
   .ui.container
-    = link_to 'Dashboard', root_path, class: "active item"
     - if current_user && current_user.is_admin?
+      = link_to 'Dashboard', admin_root_path, class: "active item"
       %a.item
         Users
+    - else  
+      = link_to 'Dashboard', root_path, class: "active item"
     .right.menu
       = link_to 'Settings', edit_user_registration_path, class: "item"
       .item
