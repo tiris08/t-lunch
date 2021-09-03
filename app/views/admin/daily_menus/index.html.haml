@@ -1,6 +1,13 @@
 .ui.container
-  .ui.vertical.segment 
-    = link_to "sdf", new_admin_daily_menu_path
+  .ui.vertical.segment
+    - if @daily_menus.first.created_at.today?
+      = link_to edit_admin_daily_menu_path(@daily_menus.first), class: "ui labaled blue large button" do
+        %i.icon.plus 
+        Edit a menu for today 
+    - else
+      = link_to new_admin_daily_menu_path, class: "ui labaled blue large button" do
+        %i.icon.plus 
+        Create a menu for today 
   .ui.vertical.segment
     .ui.five.column.grid
       - @daily_menus.reverse.each do |menu|
@@ -13,7 +20,7 @@
                 = menu.created_at.strftime("%d %b %Y")
                 %br/
                 %br/
-            = link_to 'History', menu, class: "ui bottom attached button" 
+            = link_to 'History', admin_daily_menu_path(menu), class: "ui bottom attached button" 
       .one.column.row
         .center.aligned.column
           = paginate @daily_menus
