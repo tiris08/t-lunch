@@ -3,6 +3,10 @@ class Admin::DailyMenusController < Admin::BaseController
     @daily_menus = DailyMenu.order(created_at: :desc).page(params[:page])
   end
 
+  def show
+    @daily_menu = DailyMenu.find(params[:id])
+  end
+
   def new
     @daily_menu = DailyMenu.new
     @daily_menu.food_items.build
