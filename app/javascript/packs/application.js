@@ -15,6 +15,9 @@ ActiveStorage.start()
 
 import '@doabit/semantic-ui-sass'
 
+$(document).on('turbolinks:load', function() {
+  $('.ui.radio.checkbox').checkbox();
+})
 
 // if you wan't to use custom variables, you should import custom styelesheet
 // import 'stylesheets/semantic-ui.scss'

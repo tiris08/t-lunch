@@ -11,4 +11,12 @@ body > .ui.middle.aligned.center.aligned.grid {
   max-width: 450px;
   }
 }
-  
+// form fields label
+label {
+  font-weight: 700;
+  padding-right: 1em;
+}
+
+.ui.radio.checkbox > label {
+  font-weight: unset;
+}
