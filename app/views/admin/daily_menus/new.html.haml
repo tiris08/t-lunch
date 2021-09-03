@@ -1,9 +1,9 @@
 .ui.container
   .ui.form
     %h2.header Create a manu for today
-    = simple_form_for(@daily_menu, as: :daily_menu, method: :post, url: admin_daily_menus_path) do |f|
+    = simple_form_for([:admin, @daily_menu]) do |f|
       = f.simple_fields_for :food_items do |item|
         = render 'food_items_fields', item: item
-      = f.submit 'Update', class: 'ui blue button'
+      = f.submit 'Create', class: 'ui blue button'
       = link_to "Back", :back, class: 'ui button'
       

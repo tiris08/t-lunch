@@ -1,9 +1,7 @@
 .ui.container
   .ui.vertical.segment
     - if @daily_menus.first.created_at.today?
-      = link_to edit_admin_daily_menu_path(@daily_menus.first), class: "ui labaled blue large button" do
-        %i.icon.plus 
-        Edit a menu for today 
+      = link_to "Edit a menu for today ", edit_admin_daily_menu_path(@daily_menus.first), class: "ui labaled blue large button"
     - else
       = link_to new_admin_daily_menu_path, class: "ui labaled blue large button" do
         %i.icon.plus 
