@@ -13,5 +13,33 @@ class Admin::DailyMenusController < Admin::BaseController
   end
 
   def create
+    @daily_menu = DailyMenu.new(daily_menu_params)
+    if @daily_menu.save
+      flash[:success] = "Menu created"
+      redirect_to admin_daily_menu_path(@daily_menu)
+    else
+      render :new
+    end
   end
+
+  def edit
+    @daily_menu = DailyMenu.find(params[:id])
+  end
+
+  def update
+    @daily_menu = DailyMenu.find(params[:id])
+    if @daily_menu.update(daily_menu_params)
+      flash[:success] = "Menu updated"
+      redirect_to admin_daily_menu_path(@daily_menu)
+    else
+      render 'edit'
+    end
+  end
+
+  private
+
+  def daily_menu_params
+    params.require(:daily_menu).permit(food_items_attributes:[:id, :name, :price, :course])
+  end
+  
 end 
