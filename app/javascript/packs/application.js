@@ -17,6 +17,7 @@ import '@doabit/semantic-ui-sass'
 
 $(document).on('turbolinks:load', function() {
   $('.ui.radio.checkbox').checkbox();
+  $('.ui.container.positive.center_flash.message').transition('fade', '4s');
 })
 
 // if you wan't to use custom variables, you should import custom styelesheet

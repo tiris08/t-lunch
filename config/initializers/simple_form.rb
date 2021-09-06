@@ -54,7 +54,7 @@ SimpleForm.setup do |config|
     ## Inputs
     # b.use :input, class: 'input', error_class: 'is-invalid', valid_class: 'is-valid'
     b.use :label_input
-    b.use :error, wrap_with: { tag: :span, class: 'ui pointing red basic label' }
+    b.use :error, wrap_with: { tag: :span, class: 'ui red tiny label' }
     b.use :hint,  wrap_with: { tag: :span, class: 'ui basic tiny label' }
 
     ## full_messages_for

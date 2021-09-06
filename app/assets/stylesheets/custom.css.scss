@@ -4,6 +4,15 @@
 .center_flash {
   text-align: center;
 }
+
+.ui.positive.center_flash.message {
+  margin-bottom: 10px;
+}
+
+.ui.negative.center_flash.message {
+  margin-bottom: 10px;
+}
+
 // forms container
 body > .ui.middle.aligned.center.aligned.grid {
   height: 100%;
