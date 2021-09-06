@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   namespace :admin do
     
     resources :daily_menus
-    
+    resources :users, only:[:index, :show]
     root 'daily_menus#index'
   end
   devise_for :users
