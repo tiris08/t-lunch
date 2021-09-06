@@ -15,8 +15,7 @@ class Admin::DailyMenusController < Admin::BaseController
   def create
     @daily_menu = DailyMenu.new(daily_menu_params)
     if @daily_menu.save
-      flash[:success] = "Menu created"
-      redirect_to admin_daily_menu_path(@daily_menu)
+      redirect_to admin_daily_menu_path(@daily_menu), notice: "Menu created!"
     else
       render :new
     end
@@ -29,8 +28,7 @@ class Admin::DailyMenusController < Admin::BaseController
   def update
     @daily_menu = DailyMenu.find(params[:id])
     if @daily_menu.update(daily_menu_params)
-      flash[:success] = "Menu updated"
-      redirect_to admin_daily_menu_path(@daily_menu)
+      redirect_to admin_daily_menu_path(@daily_menu), notice: "Menu updated!"
     else
       render 'edit'
     end
