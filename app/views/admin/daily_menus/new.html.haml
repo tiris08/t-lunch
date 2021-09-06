@@ -1,9 +1,17 @@
 .ui.container
-  .ui.form
-    %h2.header Create a manu for today
-    = simple_form_for([:admin, @daily_menu]) do |f|
-      = f.simple_fields_for :food_items do |item|
-        = render 'food_items_fields', item: item
-      = f.submit 'Create', class: 'ui blue button'
-      = link_to "Back", :back, class: 'ui button'
+  %h2.header Create a manu for today
+  = simple_form_for([:admin, @daily_menu], html: {class: "ui form"}) do |f|
+    #food_items.ui.vertical.segment
+      .ui.three.column.grid
+        = f.simple_fields_for :food_items do |item|
+          = render 'food_item_fields', f: item
+        .column.ui.vertical.segment
+          = link_to_add_association f, :food_items, class: 'ui primary labaled button' do
+            %i.icon.plus 
+            Add item
+    .ui.vertical.segment
+      .ui.fluid.buttons        
+        = f.submit 'Create', class: 'ui primary button'
+        .or
+        = link_to "Back", :back, class: 'ui button'
       

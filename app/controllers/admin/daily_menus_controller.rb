@@ -39,7 +39,7 @@ class Admin::DailyMenusController < Admin::BaseController
   private
 
   def daily_menu_params
-    params.require(:daily_menu).permit(food_items_attributes:[:id, :name, :price, :course])
+    params.require(:daily_menu).permit(food_items_attributes:[:id, :name, :price, :course, :_destroy])
   end
   
 end 
