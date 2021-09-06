@@ -4,7 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   has_many :order_items
-  before_save :set_admin
+  before_create :set_admin
 
   private
   
