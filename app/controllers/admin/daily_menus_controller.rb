@@ -5,6 +5,7 @@ class Admin::DailyMenusController < Admin::BaseController
 
   def show
     @daily_menu = DailyMenu.find(params[:id])
+    @users_order_items = OrderItem.includes(food_item: :daily_menu).where(food_item: {daily_menu: @daily_menu}).group_by(&:user)
   end
 
   def new

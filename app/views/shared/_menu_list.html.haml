@@ -1,19 +1,22 @@
-%table.ui.very.basic.celled.table
-  %thead
-    %tr
-      %th
-        = "Menu list on #{@daily_menu.created_at.strftime("%A %d %b %Y")}"
-        - if current_user.is_admin? && @daily_menu.created_at.today? 
-          = link_to "Edit", edit_admin_daily_menu_path(@daily_menu)
-      %th Price
-  %tbody
-    - @daily_menu.food_items.order(:course).each do |item|
+%h1.ui.center.aligned.header
+  = "Menu list on #{@daily_menu.created_at.strftime("%A %d %b %Y")}"
+.ui.piled.segment
+  %table.ui.very.basic.table
+    %thead
       %tr
-        %td
-          %h4.ui.header
-            = item.name
-            .sub.header
-              = item.course.gsub("_", " ").capitalize
-        %td
-          = item.price
-          
+        %th 
+          Menu items
+          - if current_user.is_admin? && @daily_menu.created_at.today? 
+            = link_to "Edit", edit_admin_daily_menu_path(@daily_menu)
+        %th Price
+    %tbody
+      - @daily_menu.food_items.order(:course).each do |item|
+        %tr
+          %td
+            %h4.ui.header
+              = item.name
+              .sub.header
+                = item.course.gsub("_", " ").capitalize
+          %td
+            = item.price
+            
