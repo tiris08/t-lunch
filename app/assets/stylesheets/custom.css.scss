@@ -4,6 +4,15 @@
 .center_flash {
   text-align: center;
 }
+
+.ui.positive.center_flash.message {
+  margin-bottom: 10px;
+}
+
+.ui.negative.center_flash.message {
+  margin-bottom: 10px;
+}
+
 // forms container
 body > .ui.middle.aligned.center.aligned.grid {
   height: 100%;
@@ -11,4 +20,23 @@ body > .ui.middle.aligned.center.aligned.grid {
   max-width: 450px;
   }
 }
-  
+
+// form fields label
+label {
+  font-weight: 700;
+  padding-right: 1em;
+}
+
+.ui.radio.checkbox > label {
+  font-weight: unset;
+}
+
+// button to add new form for food_item
+.column.ui.vertical.segment{
+  .ui.button {
+    margin-top:25%;
+    margin-bottom:25%;
+    margin-left:25%;
+    margin-right:25%;
+  }
+}

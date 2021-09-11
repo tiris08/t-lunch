@@ -1,0 +1,19 @@
+%table.ui.very.basic.table
+  %thead
+    %tr 
+      %th.center.aligned Order date 
+      %th Menu items (first / main / drink)
+      %th Total cost
+    %tbody
+      - @user_order_items.each_pair do |menu, order_items|
+        %tr
+          %td.selectable.center.aligned
+            = link_to "#{menu.created_at.strftime("%d %b %Y")}", admin_daily_menu_path(menu)
+          %td 
+            - price = 0
+            - order_items.each do |order_item| 
+              - price += order_item.food_item.price
+              = "#{order_item.food_item.name} / "
+          %td  
+            = price
+            

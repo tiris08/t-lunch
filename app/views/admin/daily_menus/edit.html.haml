@@ -1,0 +1,17 @@
+.ui.container
+  %h2.header Edit or add new items to the menu 
+  = simple_form_for([:admin, @daily_menu], html: {class: "ui form"}) do |f|
+    #food_items.ui.vertical.segment
+      .ui.three.column.grid
+        = f.simple_fields_for :food_items do |item|
+          = render 'food_item_fields', f: item
+        .column.ui.vertical.segment
+          = link_to_add_association f, :food_items, class: 'ui primary labaled button' do
+            %i.icon.plus 
+            Add item
+    .ui.vertical.segment
+      .ui.fluid.buttons
+        = f.submit 'Update', class: 'ui primary button'
+        .or
+        = link_to "Back", :back, class: 'ui button'
+        

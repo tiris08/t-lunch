@@ -1,0 +1,20 @@
+.ui.container
+  .ui.one.column.grid
+    .column
+      .ui.segment.piled
+        %table.ui.very.basic.celled.table
+          %thead
+            %tr
+              %th Name
+              %th Email
+              %th Registered at
+          %tbody
+            - @users.each do |user|
+              %tr
+                %td
+                  = link_to "#{user.name}", admin_user_path(user)
+                %td
+                  = user.email
+                %td
+                  = user.created_at.strftime("%d %b %Y")
+              

@@ -1,0 +1,22 @@
+%h1.ui.center.aligned.header
+  Users Orders
+.ui.piled.segment
+  %table.ui.very.basic.table
+    %thead
+      %tr 
+        %th.center.aligned User name 
+        %th Menu items (first / main / drink)
+        %th Total cost
+      %tbody
+        - @users_order_items.each_pair do |user, order_items|
+          %tr
+            %td.selectable.center.aligned
+              = link_to "#{user.name}", admin_user_path(user)
+            %td 
+              - price = 0
+              - order_items.each do |order_item| 
+                - price += order_item.food_item.price
+                = "#{order_item.food_item.name} / "
+            %td  
+              = price   
+              
