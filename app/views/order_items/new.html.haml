@@ -1,0 +1,19 @@
+.ui.container
+  .ui.two.column.grid
+    .column
+      %h1.ui.center.aligned.header Make your order here:
+      = simple_form_for @order_items, url: daily_menu_order_items_path, html: {class: "ui form"} do |f|
+        .ui.piled.segment
+          .ui.three.column.grid 
+            - @order_items.each_with_index do |item, index|
+              = simple_fields_for "order_items[]", item do |s|
+                .column 
+                  %h2.ui.center.aligned.header 
+                    = @courses[index] 
+                  .field
+                    = s.hidden_field :user_id, value: current_user.id
+                    = s.association :food_item, label: false, collection: FoodItem.where(daily_menu: params[:daily_menu_id], course: index)
+          %br/
+          = f.submit "Order", class: "ui fluid primary button"  
+    .column 
+      = render 'shared/menu_list' 
