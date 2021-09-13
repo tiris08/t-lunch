@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
   root 'daily_menus#index'
 
-  resources :daily_menus, only: [:index, :show]
+  resources :daily_menus, only: [:index, :show] do
+    get '/order_items/new', to: 'order_items#new'
+    post '/order_items', to: 'order_items#create'
+  end
   
   namespace :admin do
     
