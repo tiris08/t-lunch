@@ -12,6 +12,8 @@ class OrdersController < ApplicationController
     if @order.save
       redirect_to daily_menu_path(DailyMenu.find(params[:daily_menu_id])), notice: "Your order was successfully created"
     else
+      @course = ["First", "Main", "Drink"]
+      flash.now[:alert] = "You have to select all three courses"
       render :new
     end 
   end
@@ -27,7 +29,7 @@ class OrdersController < ApplicationController
       redirect_to daily_menu_path(DailyMenu.find(params[:daily_menu_id])), notice: "Your order has been succesfully updated!"
     else
       @course = ["First", "Main", "Drink"]
-      flash.now[:alert] = "You have to select at lest one item"
+      flash.now[:alert] = "You have to select all three courses"
       render :edit
     end
   end
@@ -42,7 +44,7 @@ class OrdersController < ApplicationController
   private
 
   def order_params
-    params.require(:order).permit(:user_id, :daily_menu_id, order_items_attributes: [:id, :food_item_id, :order_id, :_delete])
+    params.require(:order).permit(:user_id, :daily_menu_id, order_items_attributes: [:id, :food_item_id, :order_id])
   end
 
   def verify_is_not_admin!
