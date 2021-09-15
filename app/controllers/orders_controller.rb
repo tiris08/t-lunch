@@ -10,11 +10,28 @@ class OrdersController < ApplicationController
   def create
     @order = Order.new(order_params)
     if @order.save
-      redirect_to daily_menus_path(DailyMenu.find(params[:daily_menu_id])), notice: "Your order was successfully created"
+      redirect_to daily_menu_path(DailyMenu.find(params[:daily_menu_id])), notice: "Your order was successfully created"
     else
       render :new
     end 
   end
+
+  def edit
+    @order = Order.find(params[:id])
+    @course = ["First", "Main", "Drink"]
+  end
+
+  def update
+    @order = Order.find(params[:id])
+    if @order.update(order_params)
+      redirect_to daily_menu_path(DailyMenu.find(params[:daily_menu_id])), notice: "Your order has been succesfully updated!"
+    else
+      @course = ["First", "Main", "Drink"]
+      flash.now[:alert] = "You have to select at lest one item"
+      render :edit
+    end
+  end
+  
   
   private
 
