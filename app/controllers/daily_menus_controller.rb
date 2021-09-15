@@ -8,8 +8,7 @@ class DailyMenusController < ApplicationController
   def show
     @daily_menu = DailyMenu.find(params[:id])
     @user_order = current_user.orders.find_by(daily_menu: @daily_menu)
-    @user_order_items = current_user.orders.where(daily_menu: @daily_menu).first.food_items
-    @user_order_cost = @user_order_items.pluck(:price).sum
+    @user_order_cost = @user_order&.food_items&.pluck(:price)&.sum
   end
 
   private
