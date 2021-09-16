@@ -11,10 +11,7 @@
                 = menu.created_at.strftime("%d %b %Y")
                 %br/
                 %br/
-            - if menu.created_at.today? && current_user.orders.find_by(daily_menu: menu).nil?
-              = link_to 'Make an order', new_daily_menu_order_path(@daily_menus.first), class: "ui bottom attached blue button" 
-            - else 
-              = link_to 'History', menu, class: "ui bottom attached button" 
+            = make_order_or_see_history_button(menu)
       .one.column.row
         .celled.center.aligned.column
           = paginate @daily_menus
