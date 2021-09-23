@@ -3,27 +3,56 @@ RSpec.describe DailyMenusController do
   
   describe "unauthorized user" do
     
-    let(:daily_menu) { daily_menu_with_food_items }
+    let(:daily_menu) { create(:daily_menu) }
 
     describe "GET /index" do
       
-      it "redirects to login page" do 
+      it "redirects to login page with alert flash" do 
         get :index
         expect(response).to redirect_to(new_user_session_url) 
+        expect(flash[:alert]).to be_present 
       end
     end
 
     describe "GET /show" do
-      it "redirects to login page" do 
+      it "redirects to login page with alert flash" do 
         get :show, params:{ id: daily_menu }
-        expect(response).to redirect_to(new_user_session_url) 
+        expect(response).to redirect_to(new_user_session_url)
+        expect(flash[:alert]).to be_present  
+      end
+    end
+  end
+
+  describe "authorized admin" do
+    
+    let(:daily_menu) { create(:daily_menu) }
+    let(:user) { create(:user) }
+    
+    before do
+      user.update(is_admin: true)
+      sign_in(user)
+    end
+
+    describe "GET /index" do
+      it "redirects to admin root with alert flash" do 
+        get :index
+        expect(response).to redirect_to(admin_root_path)
+        expect(flash[:alert]).to be_present  
+      end
+    end
+
+    describe "GET /show" do
+      it "redirects to admin root with alert flash" do 
+        get :show, params:{ id: daily_menu }
+        expect(response).to redirect_to(admin_root_path)
+        expect(flash[:alert]).to be_present 
       end
     end
   end
 
   describe "authorized user" do 
     
-    let(:daily_menu) { daily_menu_with_food_items }
+    let(:daily_menu) { create(:daily_menu) }
     let(:user) { create(:user) }
     
     before do
@@ -56,7 +85,7 @@ RSpec.describe DailyMenusController do
         expect(assigns(:daily_menu)).to eq(daily_menu) 
       end
 
-      it "assigns @user_order" do
+      it "assigns @user_order @user_order_cost" do
         get :show, params:{ id: daily_menu }
         expect(assigns(:user_order)).to eq(user.orders.find_by(daily_menu: daily_menu))
         expect(assigns(:user_order_cost)).to eq(user.orders.find_by(daily_menu: daily_menu)&.food_items&.pluck(:price)&.sum)
