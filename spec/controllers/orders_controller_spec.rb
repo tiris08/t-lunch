@@ -209,18 +209,19 @@ RSpec.describe OrdersController, type: :controller do
         
         it "redirects to daily_menu path" do 
           patch :update, params:{ daily_menu_id: daily_menu, id: order, user_id: user,
-                                  order: {order_items_attributes: { "0": {food_item_id: food_items[1]},
-                                                                    "1": {food_item_id: food_items[2]},
-                                                                    "2": {food_item_id: food_items[3]}}}}
+                                  order: {order_items_attributes: { "0": {id: order.order_items[0], food_item_id: food_items[1]},
+                                                                    "1": {id: order.order_items[1], food_item_id: food_items[2]},
+                                                                    "2": {id: order.order_items[2], food_item_id: food_items[3]}}}}
           expect(response).to redirect_to(daily_menu_path(daily_menu)) 
         end
   
         it "updates order items in database" do
           patch :update, params:{ daily_menu_id: daily_menu, id: order, user_id: user,
-                                  order: {order_items_attributes: { "0": {food_item_id: food_items[1]},
-                                                                    "1": {food_item_id: food_items[2]},
-                                                                    "2": {food_item_id: food_items[3]}}}}
-          expect(order.order_items.last.food_item).to eq(food_items[3]) 
+                                  order: {order_items_attributes: { "0": {id: order.order_items[0], food_item_id: food_items[1]},
+                                                                    "1": {id: order.order_items[1], food_item_id: food_items[2]},
+                                                                    "2": {id: order.order_items[2], food_item_id: food_items[3]}}}}
+          order.reload
+          expect(order.order_items[2].food_item).to eq(food_items[3]) 
         end          
       end
       
