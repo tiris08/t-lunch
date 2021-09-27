@@ -224,17 +224,46 @@ RSpec.describe OrdersController, type: :controller do
           expect(order.order_items[2].food_item).to eq(food_items[3]) 
         end          
       end
+
+      context "without food_items" do
+        let(:another_daily_menu) {create(:daily_menu)}
+        let(:invalid_food_items) {create_list(:food_item, 3, daily_menu: another_daily_menu )}
+        it "renders #edit" do 
+          patch :update, params:{ daily_menu_id: daily_menu, id: order, user_id: user,
+            order: {order_items_attributes: { "0": {id: order.order_items[0], food_item_id: ""},
+                                              "1": {id: order.order_items[1], food_item_id: ""},
+                                                "2": {id: order.order_items[2], food_item_id: ""}}}}
+          expect(response).to render_template(:edit)
+        end
+  
+        it "doesn`t update order order_items in db" do
+          patch :update, params:{ daily_menu_id: daily_menu, id: order, user_id: user,
+                                  order: {order_items_attributes: { "0": {id: order.order_items[0], food_item_id: ""},
+                                                                    "1": {id: order.order_items[1], food_item_id: ""},
+                                                                    "2": {id: order.order_items[2], food_item_id: ""}}}}
+          order.reload
+          expect(order.order_items[2].food_item).to eq(food_items[2]) 
+        end    
+      end
+      
       
     end
 
     describe "DELETE /destroy" do
       
-      xit "redirects to daily menu path" do 
-      
+      it "redirects to daily menu path" do 
+        delete :destroy, params: {id: order, daily_menu_id: daily_menu}
+        expect(response).to redirect_to(root_path)
       end
 
-      xit "deletes order_items from database" do
-      
+      it "deletes order from database" do
+        delete :destroy, params: { daily_menu_id: daily_menu, id: order}
+        expect(Order.exists?(order.id)).to be_falsy  
+      end
+
+      it "deletes order items from database" do
+        delete :destroy, params: { daily_menu_id: daily_menu, id: order}
+        expect(OrderItem.where(order: order)).to be_empty  
       end
     end
   end  
